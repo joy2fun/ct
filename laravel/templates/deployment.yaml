@@ -44,7 +44,7 @@ spec:
           {{- if .Values.configMap.envName }}
           envFrom:
             - configMapRef:
-                name: {{ .Values.configMap.envName }}
+              name: {{ .Values.configMap.envName }}
           {{- end }}
           lifecycle:
             preStop:

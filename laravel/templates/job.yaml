@@ -19,10 +19,10 @@ spec:
               {{- if .Values.configMap.envName }}
               envFrom:
                 - configMapRef:
-                    name: {{ .Values.configMap.envName }}
+                  name: {{ .Values.configMap.envName }}
               {{- end }}
               imagePullPolicy: {{ .Values.job.image.pullPolicy }}
               name: artisan
           restartPolicy: Never
-  schedule: {{ .Values.job.schedule }}
+  schedule: "{{ .Values.job.schedule }}"
 {{- end }}
