@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -56,7 +56,14 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-routes: []
+ingressRoute:
+  enabled: true
+  entryPoints:
+    - web
+    - websecure
+  host: chart-example.local
+  tlsName: ""
+  additionalRoutes: []
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
