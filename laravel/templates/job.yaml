@@ -36,6 +36,6 @@ spec:
                   {{- end }}
             {{- end }}
           {{- end }}
-    restartPolicy: Never
+          restartPolicy: Never
   schedule: "{{ .Values.job.schedule }}"
 {{- end }}
