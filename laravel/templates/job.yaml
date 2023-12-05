@@ -21,6 +21,9 @@ spec:
                 {{- range .Values.configMapMounts }}
                 - name: {{ .name }}
                   mountPath: {{ .mountPath }}
+                  {{- if .subPath }}
+                  subPath: {{ .subPath }}
+                  {{- end }}
                 {{- end }}
               {{- end }}
           {{- if .Values.configMapMounts }}

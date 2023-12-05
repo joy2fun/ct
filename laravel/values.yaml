@@ -17,6 +17,7 @@ fullnameOverride: ""
 configMapMounts:
   - name: "laravel"
     mountPath: "/var/www/html"
+    subPath: ""
     items:
       - key: ".env"
         path: ".env"
