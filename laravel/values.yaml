@@ -65,7 +65,7 @@ ingressRoute:
   entryPoints:
     - web
     - websecure
-  host: chart-example.local
+  host: laravel.dev.moveclub.cn
   tlsName: ""
   additionalRoutes: []
 

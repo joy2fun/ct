@@ -61,7 +61,7 @@ ingressRoute:
   entryPoints:
     - web
     - websecure
-  host: chart-example.local
+  host: fe.dev.moveclub.cn
   tlsName: ""
   additionalRoutes: []
 
