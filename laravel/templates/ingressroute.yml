@@ -1,0 +1,26 @@
+{{- if .Values.ingressRoute.enabled }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "fe.fullname" . }}
+spec:
+  {{- with .Values.ingressRoute.entryPoints }}
+  entryPoints:
+    {{- toYaml . | nindent 4 }}
+  {{- end }} 
+
+  routes:
+    - match: Host(`{{ .Values.ingressRoute.host }}`)
+      kind: Rule
+      services:
+        - name: {{ include "fe.fullname" . }}
+          port: {{ .Values.service.port }}
+    {{- with .Values.ingressRoute.additionalRoutes }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }} 
+
+  {{- if .Values.ingressRoute.tlsName }}
+  tls:
+    secretName: {{ .Values.ingressRoute.tlsName }}
+  {{- end }}
+{{- end }}
