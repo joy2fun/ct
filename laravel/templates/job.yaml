@@ -16,11 +16,23 @@ spec:
               command:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
-              {{- if .Values.configMap.envName }}
-              envFrom:
-                - configMapRef:
-                  name: {{ .Values.configMap.envName }}
+              {{- if .Values.configMapMounts }}
+              volumeMounts:
+                {{- range .Values.configMapMounts }}
+                - name: {{ .name }}
+                  mountPath: {{ .mountPath }}
+                {{- end }}
               {{- end }}
-          restartPolicy: Never
+          {{- if .Values.configMapMounts }}
+          volumes:
+            {{- range .Values.configMapMounts }}
+            - name: {{ .name }}
+              configMap:
+                name: {{ .name }}
+                items:
+                  - key: {{ .key }}
+                    path: {{ .path }}
+            {{- end }}
+          {{- end }}
   schedule: "{{ .Values.job.schedule }}"
 {{- end }}

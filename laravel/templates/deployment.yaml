@@ -41,11 +41,6 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.configMap.envName }}
-          envFrom:
-            - configMapRef:
-              name: {{ .Values.configMap.envName }}
-          {{- end }}
           lifecycle:
             preStop:
               exec:
