@@ -1,0 +1,28 @@
+{{- if .Values.job.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "laravel.fullname" . }}
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - command:
+                - php
+                - artisan
+                - schedule:run
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              {{- if .Values.configMap.envName }}
+              envFrom:
+                - configMapRef:
+                    name: {{ .Values.configMap.envName }}
+              {{- end }}
+              imagePullPolicy: {{ .Values.job.image.pullPolicy }}
+              name: artisan
+          restartPolicy: Never
+  schedule: {{ .Values.job.schedule }}
+{{- end }}
