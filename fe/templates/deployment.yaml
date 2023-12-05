@@ -47,6 +47,18 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: nginx-frontend
+              readOnly: true
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+              - key: default.conf
+                path: default.conf
+            name: nginx-frontend
+          name: nginx-frontend
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
