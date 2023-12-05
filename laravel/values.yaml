@@ -14,9 +14,11 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-configMap:
-  envName: ""
-  siteEnabledKey: "000-default.conf"
+configMapMounts:
+  - name: "laravel"
+    mountPath: "/var/www/html"
+    key: ".env"
+    path: ".env"
 
 serviceAccount:
   # Specifies whether a service account should be created
