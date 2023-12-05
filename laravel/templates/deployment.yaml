@@ -60,8 +60,10 @@ spec:
           configMap:
             name: {{ .name }}
             items:
+              {{- range .items }}
               - key: {{ .key }}
                 path: {{ .path }}
+              {{- end }}
         {{- end }}
       {{- end }}
 
