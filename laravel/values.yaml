@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: r.dev.mb.js.cn/library/php
+  repository: r.dev.mb.js.cn/library/php-8.1
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "7.4-laravel-composer2"
+  tag: "laravel"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 configMap:
   envName: ""
-  siteEnabledKey: ""
+  siteEnabledKey: "000-default.conf"
 
 serviceAccount:
   # Specifies whether a service account should be created

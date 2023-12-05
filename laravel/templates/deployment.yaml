@@ -50,18 +50,24 @@ spec:
             preStop:
               exec:
                 command: ["sh", "-c", "sleep 5 && apache2ctl stop"]
+          {{- if .Values.configMap.siteEnabledKey }}
           volumeMounts:
             - mountPath: /etc/apache2/sites-enabled
               name: sites-enabled
               readOnly: true
+          {{- end }}
+
+      {{- if .Values.configMap.siteEnabledKey }}
       volumes:
         - configMap:
             defaultMode: 420
             items:
-              - key: {{ .Values.configMap.siteEnabledKey | default "000-default.conf" }}
+              - key: {{ .Values.configMap.siteEnabledKey }}
                 path: 000-default.conf
             name: sites-enabled
           name: sites-enabled
+      {{- end }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
