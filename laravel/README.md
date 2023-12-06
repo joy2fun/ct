@@ -16,7 +16,8 @@ ingressRoute:
 service ports
 
 ```yaml
-  addtionalPorts:
+service:
+  additionalPorts:
     - port: 81
       targetPort: 81
       protocol: TCP
