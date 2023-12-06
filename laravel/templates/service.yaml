@@ -11,5 +11,8 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    {{- with .Values.service.additionalPorts }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }} 
   selector:
     {{- include "laravel.selectorLabels" . | nindent 4 }}

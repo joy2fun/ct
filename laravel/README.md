@@ -12,3 +12,13 @@ ingressRoute:
         - name: service-name
           port: 80
 ```
+
+service ports
+
+```yaml
+  addtionalPorts:
+    - port: 81
+      targetPort: 81
+      protocol: TCP
+      name: backend
+```
