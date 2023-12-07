@@ -5,23 +5,23 @@
 replicaCount: 1
 
 image:
-  repository: r.dev.mb.js.cn/library/php-8.1
-  pullPolicy: IfNotPresent
+  repository: r.dev.mb.js.cn/app
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "laravel"
+  tag: "master"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 configMapMounts:
-  - name: "laravel"
-    volumeName: "laravel"
-    mountPath: "/var/www/html"
-    subPath: ""
+  - name: app
+    volumeName: sha1
+    mountPath: "/var/www/html/public/sha1"
+    subPath: sha1
     items:
-      - key: ".env"
-        path: ".env"
+      - key: sha1
+        path: sha1
 
 podAnnotations: {}
 
@@ -46,7 +46,7 @@ ingressRoute:
   entryPoints:
     - web
     - websecure
-  host: laravel.dev.moveclub.cn
+  host: app.dev.moveclub.cn
   tlsName: ""
   additionalRoutes: []
 
