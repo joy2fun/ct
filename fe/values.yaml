@@ -6,9 +6,18 @@ replicaCount: 1
 
 image:
   repository: nginx
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "alpine"
+
+configMapMounts:
+  - name: app
+    volumeName: sha1
+    mountPath: "/usr/share/nginx/html/sha1"
+    subPath: sha1
+    items:
+      - key: sha1
+        path: sha1
 
 imagePullSecrets: []
 nameOverride: ""

@@ -39,18 +39,31 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.configMapMounts }}
           volumeMounts:
-            - mountPath: /etc/nginx/conf.d
-              name: nginx-frontend
-              readOnly: true
+            {{- range .Values.configMapMounts }}
+            - name: {{ .volumeName }}
+              mountPath: {{ .mountPath }}
+              {{- if .subPath }}
+              subPath: {{ .subPath }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+
+      {{- if .Values.configMapMounts }}
       volumes:
-        - configMap:
-            defaultMode: 420
+        {{- range .Values.configMapMounts }}
+        - name: {{ .volumeName }}
+          configMap:
+            name: {{ .name }}
             items:
-              - key: default.conf
-                path: default.conf
-            name: nginx-frontend
-          name: nginx-frontend
+              {{- range .items }}
+              - key: {{ .key }}
+                path: {{ .path }}
+              {{- end }}
+        {{- end }}
+      {{- end }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
