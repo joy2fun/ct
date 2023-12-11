@@ -1,0 +1,48 @@
+apiVersion: v1
+entries:
+  alpine:
+  - apiVersion: v1
+    created: "2023-12-11T05:29:26.661623008Z"
+    description: Deploy a basic Alpine Linux pod
+    digest: e9d7926ce8d8450647f208f2fc2cb13529f5a7c247a0198282438543fc062a7d
+    home: https://k8s.io/helm
+    name: alpine
+    sources:
+    - https://github.com/kubernetes/helm
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/alpine-0.2.1/alpine-0.2.1.tgz
+    version: 0.2.1
+  fe:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-12-11T05:29:26.86829836Z"
+    description: A Helm chart for Kubernetes
+    digest: 83e745ef616163650d752a83b5114bc1c53ec5b104b6f0cd3e56c84fdb1e3cda
+    name: fe
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/fe-0.1.0/fe-0.1.0.tgz
+    version: 0.1.0
+  laravel:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-12-11T05:29:27.065313189Z"
+    description: A Helm chart for Kubernetes
+    digest: cc021fcebd3b0f9b95c0d84a8bbaa8ff2209054841daa9124d295943980aecff
+    name: laravel
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/laravel-0.1.1/laravel-0.1.1.tgz
+    version: 0.1.1
+  nginx:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-12-11T05:29:27.242654694Z"
+    description: A Helm chart for Kubernetes
+    digest: ae4629aa3715b96d2a58733504702338700951c1372fd1996b6a094e6838a8da
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-12-11T05:29:27.242664542Z"
