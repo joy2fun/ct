@@ -1,4 +1,4 @@
-{{- if .Values.logs.pv }}
+{{- if .Values.hostLogs.enabled }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
