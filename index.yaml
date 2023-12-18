@@ -54,6 +54,16 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/laravel-0.1.1/laravel-0.1.1.tgz
     version: 0.1.1
+  - apiVersion: v2
+    appVersion: latest
+    created: "2023-12-18T08:51:20.943056896Z"
+    description: A Helm chart for Kubernetes
+    digest: 40de84ae44d74c49d2e8390db48984f539a144ed881e75192756e53b445cc20a
+    name: laravel
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/laravel-0.1.0/laravel-0.1.0.tgz
+    version: 0.1.0
   nginx:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -65,4 +75,4 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-18T06:27:05.156644738Z"
+generated: "2023-12-18T08:51:20.943069419Z"
