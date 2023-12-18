@@ -17,27 +17,13 @@ spec:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
               {{- if .Values.configMapMounts }}
+              {{- with .Values.volumeMounts }}
               volumeMounts:
-                {{- range .Values.configMapMounts }}
-                - name: {{ .name }}
-                  mountPath: {{ .mountPath }}
-                  {{- if .subPath }}
-                  subPath: {{ .subPath }}
-                  {{- end }}
-                {{- end }}
+                {{- toYaml . | nindent 16 }}
               {{- end }}
-          {{- if .Values.configMapMounts }}
+          {{- with .Values.volumes }}
           volumes:
-            {{- range .Values.configMapMounts }}
-            - name: {{ .name }}
-              configMap:
-                name: {{ .name }}
-                items:
-                  {{- range .items }}
-                  - key: {{ .key }}
-                    path: {{ .path }}
-                  {{- end }}
-            {{- end }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           restartPolicy: Never
           {{- with .Values.job.nodeSelector }}

@@ -5,23 +5,17 @@
 replicaCount: 1
 
 image:
-  repository: r.dev.mb.js.cn/app
+  repository: alpine
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "master"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-configMapMounts:
-  - name: app
-    volumeName: sha1
-    mountPath: "/var/www/html/public/sha1"
-    subPath: sha1
-    items:
-      - key: sha1
-        path: sha1
+volumes: []
+volumeMounts: []
 
 podAnnotations: {}
 
@@ -60,6 +54,11 @@ job:
     - php
     - artisan
     - schedule:run
+
+logs:
+  pv: false
+  pvc: false
+  capacity: 5Gi 
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

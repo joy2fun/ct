@@ -43,32 +43,15 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["sh", "-c", "sleep 5 && apache2ctl stop"]
-          {{- if .Values.configMapMounts }}
+                command: ["sh", "-c", "sleep 5"]
+          {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- range .Values.configMapMounts }}
-            - name: {{ .volumeName }}
-              mountPath: {{ .mountPath }}
-              {{- if .subPath }}
-              subPath: {{ .subPath }}
-              {{- end }}
-            {{- end }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-
-      {{- if .Values.configMapMounts }}
+      {{- with .Values.volumes }}
       volumes:
-        {{- range .Values.configMapMounts }}
-        - name: {{ .volumeName }}
-          configMap:
-            name: {{ .name }}
-            items:
-              {{- range .items }}
-              - key: {{ .key }}
-                path: {{ .path }}
-              {{- end }}
-        {{- end }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,0 +1,15 @@
+{{- if .Values.logs.pvc }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "laravel.fullname" . }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.logs.capacity }}
+  storageClassName: ''
+  volumeMode: Filesystem
+  volumeName: {{ include "laravel.fullname" . }}
+{{- end }}
