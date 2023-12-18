@@ -10,6 +10,5 @@ spec:
     storage: {{ .Values.logs.capacity }}
   hostPath:
     path: /data/logs/{{ include "laravel.fullname" . }}
-    type: DirectoryOrCreate
   storageClassName: ''
 {{- end }}
