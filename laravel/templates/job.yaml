@@ -16,7 +16,6 @@ spec:
               command:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
-              {{- if .Values.configMapMounts }}
               {{- with .Values.volumeMounts }}
               volumeMounts:
                 {{- toYaml . | nindent 16 }}

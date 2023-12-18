@@ -40,7 +40,7 @@ ingressRoute:
   entryPoints:
     - web
     - websecure
-  host: app.dev.moveclub.cn
+  host: ""
   tlsName: ""
   additionalRoutes: []
 
@@ -58,7 +58,7 @@ job:
 logs:
   pv: false
   pvc: false
-  capacity: 5Gi 
+  capacity: 5Gi
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
