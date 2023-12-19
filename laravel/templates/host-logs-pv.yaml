@@ -7,7 +7,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: {{ .Values.logs.capacity }}
+    storage: {{ .Values.hostLogs.capacity }}
   hostPath:
     path: /data/logs/{{ include "laravel.fullname" . }}
   storageClassName: ''

@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.logs.capacity }}
+      storage: {{ .Values.hostLogs.capacity }}
   storageClassName: ''
   volumeMode: Filesystem
   volumeName: {{ include "laravel.fullname" . }}
