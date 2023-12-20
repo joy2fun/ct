@@ -12,6 +12,17 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/alpine-0.2.1/alpine-0.2.1.tgz
     version: 0.2.1
+  app:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-12-20T03:31:31.915723356Z"
+    description: A Helm chart for Kubernetes
+    digest: aec69efe72262728eda1da8da0438f7492d0b3580bfcb26652ba7074fffe1b0d
+    name: app
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/app-0.1.0/app-0.1.0.tgz
+    version: 0.1.0
   fe:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -85,4 +96,4 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-19T01:51:14.66320311Z"
+generated: "2023-12-20T03:31:31.915804357Z"
