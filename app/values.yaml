@@ -11,17 +11,30 @@ nameOverride: ""
 fullnameOverride: ""
 
 volumes: []
-  # - name: test
-  #   persistentVolumeClaim:
-  #     claimName: test
   # - name: params
   #   configMap:
   #     name: test
+  # - name: logfile
+  #   hostPath:
+  #     type: DirectoryOrCreate
+  #     path: /data/logs/test
+  # - name: nginx-conf
+  #   configMap:
+  #     name: nginx-default
 
 volumeMounts: []
   # - name: test
   #   mountPath: /app/logs
   #   subPath: app-logs
+  # - name: nginx-conf
+  #   mountPath: /etc/nginx/conf.d
+  #   readOnly: true
+
+envFrom: []
+  # - configMapRef:
+  #     name: test
+  # - secretRef:
+  #     name: test
 
 podAnnotations: {}
 
@@ -40,9 +53,9 @@ service:
 
 ingressRoute:
   enabled: true
-  entryPoints: []
+  entryPoints:
+    - websecure
     # - web
-    # - websecure
   host: ""
   tlsName: ""
   additionalRoutes: []
@@ -64,10 +77,6 @@ job:
     # - php
     # - artisan
     # - schedule:run
-
-hostLogs:
-  enabled: false
-  capacity: 5Gi
 
 resources: {}
 

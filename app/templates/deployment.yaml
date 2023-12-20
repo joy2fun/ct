@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "laravel.fullname" . }}
+  name: {{ include "app.fullname" . }}
   labels:
-    {{- include "laravel.labels" . | nindent 4 }}
+    {{- include "app.labels" . | nindent 4 }}
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
@@ -12,7 +12,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "laravel.selectorLabels" . | nindent 6 }}
+      {{- include "app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,7 +20,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "laravel.selectorLabels" . | nindent 8 }}
+        {{- include "app.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -38,6 +38,13 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+            {{- if .Values.service.additionalPorts }}
+            {{- range .Values.service.additionalPorts }}
+            - name: {{ .name }}
+              containerPort: {{ .targetPort }}
+              protocol: {{ .protocol }}
+            {{- end }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           lifecycle:
@@ -46,6 +53,10 @@ spec:
                 command: ["sh", "-c", "sleep 5"]
           {{- with .Values.volumeMounts }}
           volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       {{- with .Values.volumes }}
