@@ -12,12 +12,13 @@ spec:
   routes:
     - match: Host(`{{ .Values.ingressRoute.host }}`)
       kind: Rule
+      middlewares: {{ .Values.ingressRoute.middlewares }}
       services:
         - name: {{ include "app.fullname" . }}
           port: {{ .Values.service.port }}
     {{- with .Values.ingressRoute.additionalRoutes }}
     {{- toYaml . | nindent 4 }}
-    {{- end }} 
+    {{- end }}
 
   {{- if .Values.ingressRoute.tlsName }}
   tls:

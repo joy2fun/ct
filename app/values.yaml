@@ -1,10 +1,10 @@
 replicaCount: 1
 
 image:
-  repository: alpine
+  repository: nginx
   pullPolicy: Always
   # IfNotPresent
-  tag: "latest"
+  tag: "alpine"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,6 +58,7 @@ ingressRoute:
     # - web
   host: ""
   tlsName: ""
+  middlewares: []
   additionalRoutes: []
     # - kind: Rule
     #   match: Host(`host`) && PathPrefix(`/api`)
