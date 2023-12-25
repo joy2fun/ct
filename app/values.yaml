@@ -11,21 +11,31 @@ nameOverride: ""
 fullnameOverride: ""
 
 volumes: []
-  # - name: params
+  # - name: config
   #   configMap:
-  #     name: test
-  # - name: logfile
+  #     name: config
+  #     items: 
+  #       - key: env
+  #         path: .env
+  #       - key: sha1
+  #         path: sha1.txt
+  # - name: log-file
   #   hostPath:
   #     type: DirectoryOrCreate
-  #     path: /data/logs/test
+  #     path: /data/logs/app-name
   # - name: nginx-conf
   #   configMap:
   #     name: nginx-default
 
 volumeMounts: []
-  # - name: test
-  #   mountPath: /app/logs
-  #   subPath: app-logs
+  # - name: config
+  #   mountPath: /app/.env
+  #   subPath: .env
+  # - name: config
+  #   mountPath: /var/share/nginx/html/sha1.txt
+  #   subPath: sha1.txt
+  # - name: log-file
+  #   mountPath: /app/storage/logs
   # - name: nginx-conf
   #   mountPath: /etc/nginx/conf.d
   #   readOnly: true
@@ -55,7 +65,7 @@ ingressRoute:
   enabled: true
   entryPoints:
     - websecure
-    # - web
+    - web
   host: ""
   tlsName: ""
   middlewares: []
