@@ -4,7 +4,7 @@ image:
   repository: nginx
   pullPolicy: Always
   # IfNotPresent
-  tag: "alpine"
+  tag: alpine
 
 imagePullSecrets: []
 nameOverride: ""
@@ -89,13 +89,19 @@ job:
     # - artisan
     # - schedule:run
 
-lifecycle:
-  preStop:
-    exec:
-      command: ["sh", "-c", "sleep 5"]
+lifecycle: {}
+  # preStop:
+  #   exec:
+  #     command: ["sh", "-c", "sleep 5"]
   # postStart:
   #   exec:
   #     command: ["sh", "-c", "chown -R www-data:www-data /app/storage"]
+
+startupProbe:
+  exec:
+    command: ["ls", "/tmp"]
+  initialDelaySeconds: 5
+  periodSeconds: 5
 
 resources: {}
 
