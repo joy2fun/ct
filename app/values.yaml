@@ -1,14 +1,10 @@
-replicaCount: 1
+fullnameOverride: example-app
 
 image:
   repository: nginx
   pullPolicy: Always
   # IfNotPresent
   tag: alpine
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
 
 volumes: []
   # - name: config
@@ -46,12 +42,6 @@ envFrom: []
   # - secretRef:
   #     name: test
 
-podAnnotations: {}
-
-podSecurityContext: {}
-
-securityContext: {}
-
 service:
   type: ClusterIP
   port: 80
@@ -64,19 +54,24 @@ service:
 ingressRoute:
   enabled: true
   entryPoints:
-    - websecure
     - web
-  host: ""
-  tlsName: ""
-  middlewares: []
-  additionalRoutes: []
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`example-app`)
+      middlewares:
+        - name: log-request
+      services:
+        - name: service-name
+          port: 80
     # - kind: Rule
-    #   match: Host(`host`) && PathPrefix(`/api`)
+    #   match: Host(`example-app`) && PathPrefix(`/api`)
     #   middlewares:
     #     - name: stripprefix-api
     #   services:
     #     - name: service-name
     #       port: 80
+  # tlsName: 
 
 job:
   enabled: false
@@ -103,8 +98,10 @@ startupProbe:
   initialDelaySeconds: 5
   periodSeconds: 5
 
-resources: {}
+imagePullSecrets: []
+nameOverride: ""
 
+replicaCount: 1
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -112,7 +109,15 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
 nodeSelector: {}
+
+resources: {}
 
 tolerations: []
 

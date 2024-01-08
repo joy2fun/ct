@@ -9,19 +9,10 @@ spec:
     {{- toYaml . | nindent 4 }}
   {{- end }} 
 
+  {{- with .Values.ingressRoute.routes }}
   routes:
-    - match: Host(`{{ .Values.ingressRoute.host }}`)
-      kind: Rule
-      middlewares:
-        {{- with .Values.ingressRoute.middlewares }}
-        {{- toYaml . | nindent 6 }}
-        {{- end }}
-      services:
-        - name: {{ include "app.fullname" . }}
-          port: {{ .Values.service.port }}
-    {{- with .Values.ingressRoute.additionalRoutes }}
     {{- toYaml . | nindent 4 }}
-    {{- end }}
+  {{- end }} 
 
   {{- if .Values.ingressRoute.tlsName }}
   tls:
