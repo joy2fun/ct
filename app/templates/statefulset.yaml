@@ -24,7 +24,7 @@ spec:
               value: "443"
           command:
             - sh
-            - c
+            - -c
             - {{ $command }}
         {{- end }}
       serviceAccountName: {{ .Values.jobs.serviceAccountName }}
