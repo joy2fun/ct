@@ -8,6 +8,7 @@ spec:
     spec:
       template:
         spec:
+          restartPolicy: Never
           containers:
             - image: bitnami/kubectl:latest
               imagePullPolicy: IfNotPresent
