@@ -1,0 +1,31 @@
+{{- if .Values.jobs.enabled }}
+apiVersion: batch/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "app.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "app.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "app.fullname" . }}
+  template:
+    metadata:
+      labels:
+        {{- include "app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        {{- range $index, $command := .Values.jobs.commands }}
+        - image: bitnami/kubectl:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KUBERNETES_SERVICE_HOST
+              value: "kubernetes.default.svc.cluster.local"
+            - name: KUBERNETES_SERVICE_PORT
+              value: "443"
+          command:
+            - sh
+            - c
+            - {{ $command }}
+        {{- end }}
+      serviceAccountName: {{ .Values.jobs.serviceAccountName }}
+{{- end }}

@@ -73,16 +73,21 @@ ingressRoute:
     #       port: 80
   # tlsName: 
 
-job:
+cron:
   enabled: false
-  image:
-    pullPolicy: IfNotPresent
+  serviceAccountName: job
   schedule: "* * * * *"
   nodeSelector: {}
-  command: []
-    # - php
-    # - artisan
-    # - schedule:run
+  command:
+    - sh
+    - -c
+    - "kubectl exec deploy/example-app -- php artisan schedule:run"
+
+jobs:
+  enabled: false
+  serviceAccountName: job
+  commands:
+    - "while true; do kubectl exec deploy/example-app -- pwd ; sleep 5; done"
 
 lifecycle: {}
   # preStop:
