@@ -6,16 +6,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "app.selectorLabels" . | nindent 6 }}
+      jobs: {{ include "app.fullname" . }}
   serviceName: {{ include "app.fullname" . }}
   template:
     metadata:
       labels:
-        {{- include "app.selectorLabels" . | nindent 8 }}
+        jobs: {{ include "app.fullname" . }}
     spec:
       containers:
         {{- range $index, $command := .Values.jobs.commands }}
-        - image: bitnami/kubectl:latest
+        - name: job-{{ $index }}
+          image: bitnami/kubectl:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: KUBERNETES_SERVICE_HOST
