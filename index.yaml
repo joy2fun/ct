@@ -31,6 +31,17 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/app-0.1.6/app-0.1.6.tgz
     version: 0.1.6
+  cron:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-03-27T08:42:40.220021915Z"
+    description: A Helm chart for Kubernetes
+    digest: 465fa698d43ac2b2c391cbc823f3107f26a84d021f275860fe910ad20378228c
+    name: cron
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/cron-0.1.0/cron-0.1.0.tgz
+    version: 0.1.0
   nginx:
   - apiVersion: v2
     appVersion: 0.1.1
@@ -42,4 +53,4 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/nginx-0.1.1/nginx-0.1.1.tgz
     version: 0.1.1
-generated: "2024-03-27T08:05:00.535114751Z"
+generated: "2024-03-27T08:42:40.220037444Z"
