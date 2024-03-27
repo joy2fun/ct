@@ -88,10 +88,10 @@ jobs:
   commands:
     - "while true; do kubectl exec deploy/example-app -- pwd ; sleep 5; done"
 
-lifecycle: {}
-  # preStop:
-  #   exec:
-  #     command: ["sh", "-c", "sleep 5"]
+lifecycle:
+  preStop:
+    exec:
+      command: ["sh", "-c", "sleep 5"]
   # postStart:
   #   exec:
   #     command: ["sh", "-c", "chown -R www-data:www-data /app/storage"]
