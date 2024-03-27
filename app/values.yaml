@@ -71,17 +71,16 @@ ingressRoute:
     #   services:
     #     - name: service-name
     #       port: 80
-  # tlsName: 
+  tls: {}
+    # secretName: ""
 
 cron:
   enabled: false
   serviceAccountName: job
-  schedule: "* * * * *"
-  nodeSelector: {}
-  command:
-    - sh
-    - -c
-    - "kubectl exec deploy/example-app -- php artisan schedule:run"
+  jobs: 
+    - schedule: "* * * * *"
+      name: "job"
+      command: "kubectl exec deploy/example-app -- php artisan schedule:run"
 
 jobs:
   enabled: false
@@ -112,7 +111,7 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
 podAnnotations: {}
 

@@ -14,8 +14,8 @@ spec:
     {{- toYaml . | nindent 4 }}
   {{- end }} 
 
-  {{- if .Values.ingressRoute.tlsName }}
+  {{- with .Values.ingressRoute.tls }}
   tls:
-    secretName: {{ .Values.ingressRoute.tlsName }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
 {{- end }}

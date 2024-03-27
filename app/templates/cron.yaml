@@ -1,8 +1,10 @@
 {{- if .Values.cron.enabled }}
+{{- range .Values.cron.jobs }}
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "app.fullname" . }}
+  name: {{ $.Values.fullnameOverride }}-{{.name}}
 spec:
   jobTemplate:
     spec:
@@ -17,15 +19,12 @@ spec:
                   value: "kubernetes.default.svc.cluster.local"
                 - name: KUBERNETES_SERVICE_PORT
                   value: "443"
-              name: {{ include "app.fullname" . }}
-              {{- with .Values.cron.command }}
+              name: {{ .name }}
               command:
-                {{- toYaml . | nindent 16 }}
-              {{- end }}
-          {{- with .Values.cron.nodeSelector }}
-          nodeSelector:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          serviceAccountName: {{ .Values.cron.serviceAccountName }}
-  schedule: "{{ .Values.cron.schedule }}"
+                - sh
+                - -c
+                - {{ .command }}
+          serviceAccountName: {{ $.Values.cron.serviceAccountName }}
+  schedule: "{{ .schedule }}"
+{{- end }}
 {{- end }}
