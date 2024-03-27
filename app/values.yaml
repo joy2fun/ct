@@ -19,37 +19,16 @@ volumes: []
   #   hostPath:
   #     type: DirectoryOrCreate
   #     path: /data/logs/app-name
-  # - name: nginx-conf
-  #   configMap:
-  #     name: nginx-default
 
 volumeMounts: []
   # - name: config
   #   mountPath: /app/.env
   #   subPath: .env
   # - name: config
-  #   mountPath: /var/share/nginx/html/sha1.txt
+  #   mountPath: /var/www/html/public/sha1.txt
   #   subPath: sha1.txt
   # - name: log-file
   #   mountPath: /app/storage/logs
-  # - name: nginx-conf
-  #   mountPath: /etc/nginx/conf.d
-  #   readOnly: true
-
-envFrom: []
-  # - configMapRef:
-  #     name: test
-  # - secretRef:
-  #     name: test
-
-service:
-  type: ClusterIP
-  port: 80
-  additionalPorts: []
-    # - port: 81
-    #   targetPort: 81
-    #   protocol: TCP
-    #   name: backend
 
 ingressRoute:
   enabled: true
@@ -87,6 +66,21 @@ jobs:
   serviceAccountName: job
   commands:
     - "while true; do kubectl exec deploy/example-app -- pwd ; sleep 5; done"
+
+service:
+  type: ClusterIP
+  port: 80
+  additionalPorts: []
+    # - port: 81
+    #   targetPort: 81
+    #   protocol: TCP
+    #   name: backend
+
+envFrom: []
+  # - configMapRef:
+  #     name: test
+  # - secretRef:
+  #     name: test
 
 lifecycle:
   preStop:
