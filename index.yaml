@@ -14,6 +14,16 @@ entries:
     version: 0.2.1
   app:
   - apiVersion: v2
+    appVersion: 0.2.2
+    created: "2024-03-27T03:50:09.936561854Z"
+    description: A Helm chart for Kubernetes
+    digest: 8650f602ae29061b09a14443f677071762fee340501d33d735f8b14b83e99274
+    name: app
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/app-0.2.2/app-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
     appVersion: 0.2.1
     created: "2024-03-26T08:51:18.620976438Z"
     description: A Helm chart for Kubernetes
@@ -206,4 +216,4 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-26T08:51:18.621047401Z"
+generated: "2024-03-27T03:50:09.936729557Z"
