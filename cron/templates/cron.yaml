@@ -1,0 +1,28 @@
+{{- range .Values.cron.jobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $.Values.name }}-{{.name}}
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - image: bitnami/kubectl:latest
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: KUBERNETES_SERVICE_HOST
+                  value: "kubernetes.default.svc.cluster.local"
+                - name: KUBERNETES_SERVICE_PORT
+                  value: "443"
+              name: {{ .name }}
+              command:
+                - sh
+                - -c
+                - {{ .command }}
+          serviceAccountName: {{ $.Values.cron.serviceAccountName }}
+  schedule: "{{ .schedule }}"
+{{- end }}

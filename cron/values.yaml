@@ -1,0 +1,8 @@
+name: schedule
+
+cron:
+  serviceAccountName: job
+  jobs: 
+    - schedule: "* * * * *"
+      name: down-example
+      command: "kubectl scale deploy example-app --replicas=0"
