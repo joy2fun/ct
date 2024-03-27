@@ -41,15 +41,8 @@ ingressRoute:
       middlewares:
         - name: log-request
       services:
-        - name: service-name
+        - name: example-app
           port: 80
-    # - kind: Rule
-    #   match: Host(`example-app`) && PathPrefix(`/api`)
-    #   middlewares:
-    #     - name: stripprefix-api
-    #   services:
-    #     - name: service-name
-    #       port: 80
   tls: {}
     # secretName: ""
 
