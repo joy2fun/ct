@@ -69,6 +69,12 @@ service:
     #   protocol: TCP
     #   name: backend
 
+env:
+  # - name: APP_HOST
+  #   value: example.app
+  # - name: TZ
+  #   value: Asia/Shanghai
+
 envFrom: []
   # - configMapRef:
   #     name: test
