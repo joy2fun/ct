@@ -1,4 +1,4 @@
-{{- if .Values.jobs.enabled }}
+{{- if .Values.tasks.enabled }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -6,18 +6,22 @@ metadata:
 spec:
   selector:
     matchLabels:
-      jobs: {{ include "app.fullname" . }}
+      tasks: {{ include "app.fullname" . }}
   serviceName: {{ include "app.fullname" . }}
   template:
     metadata:
       labels:
-        jobs: {{ include "app.fullname" . }}
+        tasks: {{ include "app.fullname" . }}
     spec:
       containers:
-        {{- range $index, $command := .Values.jobs.commands }}
-        - name: job-{{ $index }}
+        {{- range $index, $task := .Values.tasks.commands }}
+        - name: task-{{ $index }}-{{ $task.name }}
           image: bitnami/kubectl:latest
           imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1024Mi"
           env:
             - name: KUBERNETES_SERVICE_HOST
               value: "kubernetes.default.svc.cluster.local"
@@ -26,7 +30,7 @@ spec:
           command:
             - sh
             - -c
-            - {{ $command }}
+            - while true; do {{ $task.command }}; sleep {{ $task.sleep | default 10 }} ; done
         {{- end }}
-      serviceAccountName: {{ .Values.jobs.serviceAccountName }}
+      serviceAccountName: {{ .Values.tasks.serviceAccountName }}
 {{- end }}

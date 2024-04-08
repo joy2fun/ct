@@ -54,11 +54,13 @@ cron:
       name: "job"
       command: "kubectl exec deploy/example-app -- su www-data -s /bin/sh -c 'php artisan schedule:run'"
 
-jobs:
+tasks:
   enabled: false
   serviceAccountName: job
   commands:
-    - while true; do kubectl exec deploy/example-app -- su www-data -s /bin/sh -c 'whoami'; sleep 5; done
+    - name: whoami
+      sleep: 10
+      command: kubectl exec deploy/example-app -- su www-data -s /bin/sh -c 'whoami'
 
 service:
   type: ClusterIP
