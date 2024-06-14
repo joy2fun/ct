@@ -30,6 +30,8 @@ volumeMounts: []
   # - name: log-file
   #   mountPath: /app/storage/logs
 
+command: []
+
 ingressRoute:
   enabled: true
   entryPoints:
@@ -49,14 +51,16 @@ ingressRoute:
 cron:
   enabled: false
   serviceAccountName: job
+  image: bitnami/kubectl:latest
   jobs: 
     - schedule: "* * * * *"
       name: "job"
-      command: "kubectl exec deploy/example-app -- su www-data -s /bin/sh -c 'php artisan schedule:run'"
+      command: kubectl exec deploy/example-app -- su www-data -s /bin/sh -c 'php artisan schedule:run'
 
 tasks:
   enabled: false
   serviceAccountName: job
+  image: bitnami/kubectl:latest
   commands:
     - name: whoami
       sleep: 10

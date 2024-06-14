@@ -16,7 +16,7 @@ spec:
       containers:
         {{- range $index, $task := .Values.tasks.commands }}
         - name: task-{{ $index }}-{{ $task.name }}
-          image: bitnami/kubectl:latest
+          image: {{ .Values.tasks.image }}
           imagePullPolicy: IfNotPresent
           resources:
             limits:
