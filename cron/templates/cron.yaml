@@ -11,7 +11,7 @@ spec:
         spec:
           restartPolicy: Never
           containers:
-            - image: bitnami/kubectl:latest
+            - image: {{ $.Values.cron.image | default "bitnami/kubectl:latest" }}
               imagePullPolicy: IfNotPresent
               env:
                 - name: KUBERNETES_SERVICE_HOST
@@ -24,5 +24,9 @@ spec:
                 - -c
                 - {{ .command }}
           serviceAccountName: {{ $.Values.cron.serviceAccountName }}
+          {{- with $.Values.cron.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
   schedule: "{{ .schedule }}"
 {{- end }}

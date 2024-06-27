@@ -7,9 +7,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "app.selectorLabels" . | nindent 6 }}
@@ -55,9 +53,17 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if not (empty .Values.envs) }}
+          env:
+            {{- range $key, $value := .Values.envs }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- else }}
           {{- with .Values.env }}
           env:
             {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- end }}
           {{- with .Values.envFrom }}
           envFrom:

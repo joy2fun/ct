@@ -2,7 +2,8 @@ name: schedule
 
 cron:
   serviceAccountName: job
+  nodeSelector: {}
   jobs: 
     - schedule: "* * * * *"
       name: down-example
-      command: "kubectl scale deploy example-app --replicas=0"
+      command: kubectl scale deploy example-app --replicas=0

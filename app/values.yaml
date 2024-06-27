@@ -11,26 +11,22 @@ volumes: []
   #   configMap:
   #     name: config
   #     items: 
-  #       - key: env
-  #         path: .env
   #       - key: sha1
   #         path: sha1.txt
-  # - name: log-file
+  # - name: log-path
   #   hostPath:
   #     type: DirectoryOrCreate
   #     path: /data/logs/app-name
 
 volumeMounts: []
   # - name: config
-  #   mountPath: /app/.env
-  #   subPath: .env
-  # - name: config
   #   mountPath: /var/www/html/public/sha1.txt
   #   subPath: sha1.txt
-  # - name: log-file
+  # - name: log-path
   #   mountPath: /app/storage/logs
 
-command: []
+envs:
+  TZ: Asia/Shanghai
 
 ingressRoute:
   enabled: true
@@ -48,6 +44,8 @@ ingressRoute:
   tls: {}
     # secretName: ""
 
+command: []
+
 cron:
   enabled: false
   serviceAccountName: job
@@ -61,7 +59,6 @@ cron:
 tasks:
   enabled: false
   serviceAccountName: job
-  image: bitnami/kubectl:latest
   nodeSelector: {}
   commands:
     - name: whoami
@@ -78,8 +75,6 @@ service:
     #   name: backend
 
 env:
-  # - name: APP_HOST
-  #   value: example.app
   # - name: TZ
   #   value: Asia/Shanghai
 
@@ -107,12 +102,6 @@ imagePullSecrets: []
 nameOverride: ""
 
 replicaCount: 1
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
 
 podAnnotations: {}
 
