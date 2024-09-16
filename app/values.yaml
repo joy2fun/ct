@@ -55,6 +55,7 @@ cron:
     - schedule: "* * * * *"
       name: "job"
       command: kubectl exec deploy/example-app -- su www-data -s /bin/sh -c 'php artisan schedule:run'
+      concurrencyPolicy: Forbid
 
 tasks:
   enabled: false

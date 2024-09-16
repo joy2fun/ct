@@ -6,6 +6,7 @@ kind: CronJob
 metadata:
   name: {{ $.Values.fullnameOverride }}-{{.name}}
 spec:
+  concurrencyPolicy: {{ .concurrencyPolicy | default "Forbid" }}
   jobTemplate:
     spec:
       template:

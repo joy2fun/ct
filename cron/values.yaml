@@ -7,3 +7,5 @@ cron:
     - schedule: "* * * * *"
       name: down-example
       command: kubectl scale deploy example-app --replicas=0
+      concurrencyPolicy: Forbid
+
