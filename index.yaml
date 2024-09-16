@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   app:
   - apiVersion: v2
+    appVersion: 0.2.9
+    created: "2024-09-16T01:08:19.831091199Z"
+    description: A Helm chart for Kubernetes
+    digest: 43c4476973f4859f83416e59299f5e86b8d6681116c8e625f2673926d50b1828
+    name: app
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/app-0.2.9/app-0.2.9.tgz
+    version: 0.2.9
+  - apiVersion: v2
     appVersion: 0.2.8
     created: "2024-06-27T08:42:53.711447593Z"
     description: A Helm chart for Kubernetes
@@ -83,6 +93,16 @@ entries:
     version: 0.1.6
   cron:
   - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2024-09-16T01:08:19.936866959Z"
+    description: A Helm chart for Kubernetes
+    digest: 231d16b4fa8a303eef05b45485b5eae8a248a1cb95521869aeef4388d825cb61
+    name: cron
+    type: application
+    urls:
+    - https://github.com/joy2fun/ct/releases/download/cron-0.1.2/cron-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.1.1
     created: "2024-06-27T08:42:53.81397137Z"
     description: A Helm chart for Kubernetes
@@ -123,4 +143,4 @@ entries:
     urls:
     - https://github.com/joy2fun/ct/releases/download/nginx-0.1.1/nginx-0.1.1.tgz
     version: 0.1.1
-generated: "2024-06-27T08:42:53.926578788Z"
+generated: "2024-09-16T01:08:19.936921531Z"
